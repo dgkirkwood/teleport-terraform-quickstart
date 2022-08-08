@@ -22,39 +22,26 @@ build {
 }
 
 
-source "amazon-ebs" "ubuntu" {
-  ami_name      = var.ami_name
-  instance_type = "t2.micro"
-  region        = var.region
-  vpc_id = var.vpc_id
-  subnet_id = var.subnet_id
-  associate_public_ip_address = true
-  ssh_interface = "public_ip"
-  force_deregister = true
-  force_delete_snapshot = true
-  source_ami_filter {
-    filters = {
-      name                = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"
-      root-device-type    = "ebs"
-      virtualization-type = "hvm"
-    }
-    most_recent = true
-    owners      = ["099720109477"]
-  }
+source "googlecompute" "ubuntu" {
+  project_id = var.project_id
+  source_image_family = "ubuntu-2004-lts"
   ssh_username = "ubuntu"
+  zone = var.zone
+  image_family = var.ami_name
 }
+
 
 build {
   name    = "packer-teleport-proxy"
   sources = [
-    "source.amazon-ebs.ubuntu"
+    "source.googlecompute.ubuntu"
   ]
   provisioner "shell" {
     inline = [
         "echo Adding Users...",
         "sudo adduser --gecos '' --disabled-password developer",
         "sudo adduser --gecos '' --disabled-password operations",
-        "sudo adduser --gecos '' --disabled-password devops"
+        "sudo adduser --gecos '' --disabled-password devops",
     ]
   }
   provisioner "shell" {
