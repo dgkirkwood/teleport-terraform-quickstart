@@ -1,5 +1,5 @@
 data "google_compute_image" "teleport-target" {
-  family = "dk-teleport-ubuntu-target"
+  family = var.ami_name
 }
 
 resource "google_compute_instance" "vm_instance" {
@@ -14,9 +14,17 @@ resource "google_compute_instance" "vm_instance" {
   }
 
   network_interface {
-    network = data.google_compute_network.proxy-network.name
+    network = google_compute_network.target-network.name
     access_config {
     }
   }
+  metadata_startup_script = <<EOF
+#!/bin/bash
+sudo hostnamectl set-hostname ${var.hostname}
+echo ${var.jointoken} > /var/lib/teleport/jointoken
+sudo systemctl restart teleport
+
+EOF
+
 }
 

@@ -1,3 +1,3 @@
-data "google_compute_network" "proxy-network" {
-  name = "${var.prefix}-teleport-proxy"
+resource "google_compute_network" "target-network" {
+  name = "${var.prefix}-teleport-target"
 }

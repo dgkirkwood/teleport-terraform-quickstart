@@ -2,7 +2,7 @@ version: v2
 teleport:
   data_dir: /var/lib/teleport
   join_params:
-    token_name: ${join_token}
+    token_name: /var/lib/teleport/jointoken
     method: token
   log:
     output: stderr

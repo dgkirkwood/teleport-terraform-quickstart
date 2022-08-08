@@ -8,7 +8,7 @@ packer {
 }
 
 locals {
-  config_template = templatefile("${path.root}/teleportconfig.tmpl", { join_token = var.join_token, auth_address = var.auth_address })
+  config_template = templatefile("${path.root}/teleportconfig.tmpl", {auth_address = var.auth_address })
 }
 
 source "file" "teleport_config" {
