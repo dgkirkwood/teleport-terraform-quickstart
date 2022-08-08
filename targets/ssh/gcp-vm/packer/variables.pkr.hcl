@@ -1,7 +1,3 @@
-variable "join_token" {
-    type = string
-}
-
 variable "auth_address" {
     type = string
 }

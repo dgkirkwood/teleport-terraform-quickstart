@@ -15,9 +15,9 @@ Please note the following pre-requisites for using this repository:
 ## How to use this repository
 
 ### Packer Build
-Packer is used to create a custom AMI with the Teleport binary, and a configuration file which the binary will use to join your Teleport cluster. To see the steps contained within the Packer build, see the file `aws-ssh-target.pkr.hcl`. Please note this is a generic build which you may want to customise with your own local users or additional binaries on the target machine. 
+Packer is used to create a custom AMI with the Teleport binary, and a configuration file which the binary will use to join your Teleport cluster. To see the steps contained within the Packer build, see the file `packer/aws-ssh-target.pkr.hcl`. Please note this is a generic build which you may want to customise with your own local users or additional binaries on the target machine. 
 
-This build will also download the latest version of Teleport be default. Please ensure compatibility between your Teleport cluster and the binary on the target. 
+This build will also download the latest version of Teleport by default. Please ensure compatibility between your Teleport cluster and the binary on the target. 
 
 1. Clone this repository to your local machine 
 2. Navigate to the `/targets/ssh/aws-ec2join/packer` subdirectory
