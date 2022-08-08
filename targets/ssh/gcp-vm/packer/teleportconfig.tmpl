@@ -2,8 +2,8 @@ version: v2
 teleport:
   data_dir: /var/lib/teleport
   join_params:
-    token_name: ${token_name}
-    method: ec2
+    token_name: ${join_token}
+    method: token
   log:
     output: stderr
     severity: INFO
