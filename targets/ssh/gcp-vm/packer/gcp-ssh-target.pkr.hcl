@@ -17,7 +17,7 @@ source "file" "teleport_config" {
 
 build {
   source "source.file.teleport_config" {
-    target = "../../config_files/aws_ssh_node.yaml"
+    target = "../../config_files/gcp_ssh_node.yaml"
   }
 }
 
@@ -55,7 +55,7 @@ build {
     ]
   }
   provisioner "file" {
-    source = "../../config_files/aws_ssh_node.yaml"
+    source = "../../config_files/gcp_ssh_node.yaml"
     destination = "~/teleport.yaml"
   }
   provisioner "shell" {
