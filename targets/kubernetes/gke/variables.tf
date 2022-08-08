@@ -1,0 +1,11 @@
+variable "project_id" {
+  description = "Your GCP project ID"
+}
+
+variable "region" {
+  description = "The GCP region where your cluster will be deployed"
+}
+
+variable "proxy_address" {
+  description = "The address of your Teleport proxy, including port"
+}
