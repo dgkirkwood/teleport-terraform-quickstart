@@ -28,17 +28,17 @@ Terraform is used to create one or more GCP clusters and all the supporting infr
 ```
 4. Open the `main.tf` file
 5. Fill in each of the remaining inputs so that the cluster can be created. Your code should appear similar to the following: 
-   ```
-    module "cluster1" {
-        source = "./module-gke-teleport"
-        clustername = "my-cluster-name"
-        project_id = var.project_id
-        region     = var.region
-        proxy_address = var.proxy_address
-        auth_token = "aebhhpa234234345we45s453"
-        label-environment = "production"
-        }
-   ```
+```
+   module "cluster1" {
+       source = "./module-gke-teleport"
+       clustername = "my-cluster-name"
+       project_id = var.project_id
+       region     = var.region
+       proxy_address = var.proxy_address
+       auth_token = "aebhhpa234234345we45s453"
+       label-environment = "production"
+       }
+```
 **To create more than one cluster, simply copy and paste the module block, providing new values for the clustername and auth_token inputs.**
 
 6. In the same directory, run `terraform init` to ensure Terraform has the right plugins loaded
