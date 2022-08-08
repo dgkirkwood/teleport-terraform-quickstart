@@ -19,10 +19,6 @@ variable "auth_token" {
   description = "The token generated from your Teleport proxy"
 }
 
-variable "app_auth_token" {
-  description = "The app token generated from your Teleport proxy"
-}
-
 variable "proxy_address" {
   description = "The address of your Teleport proxy"
 }

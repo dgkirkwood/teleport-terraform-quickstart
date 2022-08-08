@@ -15,11 +15,11 @@ terraform {
 
 module "cluster1" {
   source = "./module-gke-teleport"
-  clustername = "minas-morgul"
+  clustername = "bree"
   project_id = var.project_id
   region     = var.region
   proxy_address = var.proxy_address
-  auth_token = "aedbd1630fecc9b166767a4448b59351"
+  auth_token = "cba296805454b9555dee0e39e1489172"
   label-environment = "production"
 }
 
