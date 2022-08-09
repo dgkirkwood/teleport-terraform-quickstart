@@ -29,7 +29,7 @@ Terraform is used to create one or more EKS clusters and all the supporting infr
    label_environment = "dev"
 ```
 
-1. In the same directory, run `terraform init` to ensure Terraform has the right plugins loaded
-2. Run `terraform plan` to see the resources created by this code and ensure there are no input or syntax errors
-3. Run `terraform apply` to create the target clusters. 
-4. Note that on completion of the Terraform run, you will not see any outputs by default. Your Kubernetes cluster should automatically join your Teleport cluster. The module creates a role binding between the ClusterRole of 'view' to a Kubernetes group named 'viewonly' which you can then map to your Teleport roles. If your cluster does not join, you can troubleshoot the cluster using `aws eks update-kubeconfig --region <region> --name <cluster name>` to authenticate, and then kubectl to investigate logs. 
+4. In the same directory, run `terraform init` to ensure Terraform has the right plugins loaded
+5. Run `terraform plan` to see the resources created by this code and ensure there are no input or syntax errors
+6. Run `terraform apply` to create the target clusters. 
+7. Note that on completion of the Terraform run, you will not see any outputs by default. Your Kubernetes cluster should automatically join your Teleport cluster. The module creates a role binding between the ClusterRole of 'view' to a Kubernetes group named 'viewonly' which you can then map to your Teleport roles. If your cluster does not join, you can troubleshoot the cluster using `aws eks update-kubeconfig --region <region> --name <cluster name>` to authenticate, and then kubectl to investigate logs. 
