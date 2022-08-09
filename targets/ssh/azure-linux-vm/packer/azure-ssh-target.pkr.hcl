@@ -1,8 +1,8 @@
 packer {
   required_plugins {
-    amazon = {
-      version = ">= 0.0.2"
-      source  = "github.com/hashicorp/amazon"
+    azure = {
+      version = ">= 1.2.0"
+      source  = "github.com/hashicorp/azure"
     }
   }
 }
@@ -17,31 +17,32 @@ source "file" "teleport_config" {
 
 build {
   source "source.file.teleport_config" {
-    target = "../../config_files/gcp_ssh_node.yaml"
+    target = "../../config_files/azure_ssh_node.yaml"
   }
 }
 
-
-source "googlecompute" "ubuntu" {
-  project_id = var.project_id
-  source_image_family = "ubuntu-2004-lts"
-  ssh_username = "ubuntu"
-  zone = var.zone
-  image_family = var.ami_name
+source "azure-arm" "ubuntu" {
+  use_azure_cli_auth = true
+  image_publisher = "Canonical"
+  image_offer = "0001-com-ubuntu-server-focal"
+  image_sku = "20_04-lts"
+  location = var.region
+  managed_image_resource_group_name = var.image_rg
+  managed_image_name = var.image_name
+  os_type = "Linux"
 }
-
 
 build {
   name    = "packer-teleport-target"
   sources = [
-    "source.googlecompute.ubuntu"
+    "source.azure-arm.ubuntu"
   ]
   provisioner "shell" {
     inline = [
         "echo Adding Users...",
         "sudo adduser --gecos '' --disabled-password developer",
         "sudo adduser --gecos '' --disabled-password operations",
-        "sudo adduser --gecos '' --disabled-password devops",
+        "sudo adduser --gecos '' --disabled-password sysadmin"
     ]
   }
   provisioner "shell" {
@@ -55,7 +56,7 @@ build {
     ]
   }
   provisioner "file" {
-    source = "../../config_files/gcp_ssh_node.yaml"
+    source = "../../config_files/azure_ssh_node.yaml"
     destination = "~/teleport.yaml"
   }
   provisioner "shell" {

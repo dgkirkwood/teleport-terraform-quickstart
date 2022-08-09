@@ -1,0 +1,36 @@
+version: v2
+teleport:
+  data_dir: /var/lib/teleport
+  join_params:
+    token_name: /var/lib/teleport/jointoken
+    method: token
+  log:
+    output: stderr
+    severity: INFO
+    format:
+      output: text
+  ca_pin: []
+  diag_addr: ""
+  auth_servers:
+    - ${auth_address}
+auth_service:
+    enabled: false
+proxy_service:
+    enabled: false
+ssh_service:
+  enabled: "yes"
+  labels:
+    role: target
+  commands:
+  - name: hostname
+    command: [hostname]
+    period: 1m0s
+  - name: arch
+    command: [uname, -p]
+    period: 1h0m0s
+  - name: kernel
+    command: [uname, -r]
+    period: 1h0m0s
+  - name: uptime
+    command: [uptime, -p]
+    period: 1h0m0s
