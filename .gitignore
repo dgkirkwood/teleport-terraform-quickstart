@@ -50,3 +50,5 @@ crash.log
 
 # For built boxes
 *.box
+
+.commands.*
