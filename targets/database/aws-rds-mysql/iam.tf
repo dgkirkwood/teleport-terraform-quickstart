@@ -1,8 +1,8 @@
 resource "aws_iam_policy" "ec2rds" {
-  name = "ec2rds"
-  path = "/"
+  name        = "ec2rds"
+  path        = "/"
   description = "EC2 RDS Access"
-  policy = <<POLICY
+  policy      = <<POLICY
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -36,10 +36,10 @@ POLICY
 }
 
 resource "aws_iam_policy" "ec2rds_boundary" {
-  name = "ec2rds_boundary"
-  path = "/"
+  name        = "ec2rds_boundary"
+  path        = "/"
   description = "EC2 RDS Permissions boundary"
-  policy = <<POLICY
+  policy      = <<POLICY
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -73,7 +73,7 @@ POLICY
 }
 
 resource "aws_iam_role" "ec2_assume" {
-  name = "ec2_rds_assume"
+  name               = "ec2_rds_assume"
   assume_role_policy = <<POLICY
 {
     "Version": "2012-10-17",
@@ -93,11 +93,11 @@ POLICY
 
 resource "aws_iam_role_policy_attachment" "ec2_rds" {
   policy_arn = aws_iam_policy.ec2rds.arn
-  role = aws_iam_role.ec2_assume.name
+  role       = aws_iam_role.ec2_assume.name
 }
 
 resource "aws_iam_instance_profile" "ec2_rds" {
   name = "${var.prefix}-ec2_rds_profile"
   role = aws_iam_role.ec2_assume.name
 }
-  
+

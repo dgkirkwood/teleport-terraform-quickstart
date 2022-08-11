@@ -1,5 +1,3 @@
-
-
 data "aws_ami" "target" {
   most_recent = true
 
@@ -12,19 +10,15 @@ data "aws_ami" "target" {
 }
 
 
-
-
-
-
 resource "aws_instance" "target_node" {
-  ami           = data.aws_ami.target.id
-  instance_type = "t2.micro"
-  subnet_id = module.vpc.public_subnets[0]
+  ami                         = data.aws_ami.target.id
+  instance_type               = "t2.micro"
+  subnet_id                   = module.vpc.public_subnets[0]
   associate_public_ip_address = true
-  vpc_security_group_ids = [ aws_security_group.rds.id ]
-  key_name = var.key_name
-  iam_instance_profile = aws_iam_instance_profile.ec2_rds.name
-  user_data = <<EOF
+  vpc_security_group_ids      = [aws_security_group.rds.id]
+  key_name                    = var.key_name
+  iam_instance_profile        = aws_iam_instance_profile.ec2_rds.name
+  user_data                   = <<EOF
 #!/bin/bash
 echo "Changing hostname..."
 sudo hostnamectl set-hostname ${var.hostname}
@@ -45,7 +39,7 @@ EOT
 sudo systemctl restart teleport
 EOF
   metadata_options {
-    http_endpoint = "enabled"
+    http_endpoint          = "enabled"
     instance_metadata_tags = "enabled"
   }
 

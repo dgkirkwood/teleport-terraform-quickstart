@@ -24,12 +24,12 @@ variable "key_name" {
 }
 
 variable "dbs" {
-    type = map
-    default = {
-        db1 = {
-            dbname = "db1"
-            environment = "dev"
-        }
+  type = map(any)
+  default = {
+    db1 = {
+      dbname      = "db1"
+      environment = "dev"
     }
+  }
 }
 
