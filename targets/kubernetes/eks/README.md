@@ -9,7 +9,7 @@ Please note the following pre-requisites for using this repository:
 - Network connectivity between these EKS clusters and the mentioned Teleport proxy. The security groups in this repository are very permissive and allow all egress out of the created VPC. 
 - A Teleport join token for Kubernetes. Please see instructions [here](https://goteleport.com/docs/kubernetes-access/getting-started/) or use `tctl tokens add --type=kube`
 - The Terraform binary on your local machine, or on a machine where you can perform the automated builds. Tested with Terraform v1.2.4.
-- AWS credentials. Any of the accepted credential types for automated provisioning on AWS. Examples can be found [here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/getting_started).
+- AWS credentials. Any of the accepted credential types for automated provisioning on AWS. Examples can be found [here](https://registry.terraform.io/providers/hashicorp/aws/latest/docs).
 
 ## How to use this repository
 
