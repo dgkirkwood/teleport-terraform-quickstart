@@ -7,16 +7,16 @@ This repository contains the code to stand up an Ansible control node and two ta
 Please note the following pre-requisites for using this repository:
 - A working, accessible Teleport cluster. You will need your proxy address as an input to this code. 
 - Network connectivity between these EC2 instances and the mentioned Teleport proxy. The security groups in this repository allow all egress out of the created VPC. 
-- EC2 Join configured for your Teleport cluster. See instructions [here](https://goteleport.com/docs/setup/guides/joining-nodes-aws-ec2/)
-- A Machine ID join token. This will be created on your Auth cluster using a command such as `tctl bots add ansible --roles=access --logins=ubuntu`
+- EC2 Join configured for your Teleport cluster. See instructions [here](https://goteleport.com/docs/setup/guides/joining-nodes-aws-ec2/).
+- A Machine ID join token. This can be created on your Auth cluster using the following command: `tctl bots add ansible --roles=access --logins=ubuntu`
 - An existing Packer build for the Teleport target Linux machine. Please see the `targets/ssh/aws-ec2join` directory and follow the Packer instructions.
 - The Terraform binary on your local machine, or on a machine where you can perform the automated builds. Tested using Terraform v1.2.4
-- AWS Credentials. Any of the accepted credential types for automated provisioning on AWS. Examples can be found [here](https://registry.terraform.io/providers/hashicorp/aws/latest/docs).
+- AWS Credentials. Any of the accepted credential types for automated provisioning on AWS will do. Examples can be found [here](https://registry.terraform.io/providers/hashicorp/aws/latest/docs).
 
 ## How to use this repository
 
 ### Terraform Build
-Terraform is used to create one or more target machines using the image from your Packer Build steps. You can take a look at the .tf files in this repository to understand what will be built. This is by no means a best-practice deployment, more one that will get you started quickly. Please note the Packer build must have completed succesfully before your Terraform build can begin.
+Terraform is used to create one Ansible control node and two target machines using the image from your Packer Build steps. You can take a look at the .tf files in this repository to understand what will be built. This is by no means a best-practice deployment, more one that will get you started quickly. Please note the Packer build must have completed succesfully before your Terraform build can begin.
 
 1. Navigate to the `/targets/machine_id/aws_ansible` directory
 2. Open the `variables.tf` file and inspect the required variables for this build.
@@ -42,7 +42,7 @@ Terraform is used to create one or more target machines using the image from you
     }
    }
 ```
-**Please note the machines variable requires two target machines for this example. You can configure more or less target machines but you will need to alter the Terraform config for the Ansible targets.**
+**Please note the machines variable requires two target machines for this example. You can configure more or less target machines but you will need to alter the Terraform config for the Ansible control node.**
 
 4. In the same directory, run `terraform init` to ensure Terraform has the right plugins loaded
 5. Run `terraform plan` to see the resources created by this code and ensure there are no input or syntax errors
