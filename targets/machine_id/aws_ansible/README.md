@@ -1,7 +1,7 @@
 # Teleport Quick Start with Terraform
 ## Ansible SSH with Teleport Machine ID
 
-This repository contains the code to stand up an Ansible control node and two target nodes, using Teleport [Machine ID](https://goteleport.com/docs/machine-id/introduction/) to facilitate secure SSH access for Ansible. 
+This repository contains the code to stand up an Ansible control node and two target nodes, using Teleport [Machine ID](https://goteleport.com/docs/machine-id/introduction/) to facilitate secure SSH access for Ansible. This code was built referring to the [Machine ID for Ansible guide](https://goteleport.com/docs/machine-id/guides/ansible/).
 
 ## Pre-requisites
 Please note the following pre-requisites for using this repository:
