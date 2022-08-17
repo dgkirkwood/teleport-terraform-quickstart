@@ -1,0 +1,43 @@
+version: v2
+teleport:
+  data_dir: /var/lib/teleport
+  log:
+    output: stderr
+    severity: INFO
+    format:
+      output: text
+  ca_pin: []
+  diag_addr: ""
+auth_service:
+  enabled: "yes"
+  listen_addr: 0.0.0.0:3025
+  cluster_name: dk.teleportdemo.com
+  proxy_listener_mode: multiplex
+  license_file: /var/lib/teleport/license.pem
+  authentication:
+    type: oidc
+    second_factor: webauthn
+    webauthn:
+      rp_id: dk.teleportdemo.com
+ssh_service:
+  enabled: "yes"
+  labels:
+    role: proxy
+  commands:
+  - name: hostname
+    command: [hostname]
+    period: 1m0s
+  - name: arch
+    command: ['/bin/uname', '-p']
+    period: 1h0m0s
+  - name: os
+    command: ['/bin/uname']
+    period: 1h0m0s
+proxy_service:
+  enabled: "yes"
+  web_listen_addr: 0.0.0.0:443
+  public_addr: dk.teleportdemo.com:443
+  https_keypairs: []
+  acme:
+    enabled: "yes"
+    email: dan.kirkwood@goteleport.com

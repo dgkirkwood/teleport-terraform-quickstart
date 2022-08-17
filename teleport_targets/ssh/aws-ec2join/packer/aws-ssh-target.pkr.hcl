@@ -45,7 +45,7 @@ source "amazon-ebs" "ubuntu" {
 }
 
 build {
-  name    = "packer-teleport-proxy"
+  name    = "packer-teleport-target"
   sources = [
     "source.amazon-ebs.ubuntu"
   ]
