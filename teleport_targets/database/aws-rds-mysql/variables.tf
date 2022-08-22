@@ -23,6 +23,14 @@ variable "key_name" {
   description = "The name of your SSH key on AWS"
 }
 
+variable "prefix" {
+  description = "A prefix for unique naming on resources"
+}
+
+variable "hostname" {
+  description = "The hostname of the Linux gateway node"
+}
+
 variable "dbs" {
   type = map(any)
   default = {
