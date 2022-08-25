@@ -19,8 +19,29 @@ module "cluster1" {
   project_id = var.project_id
   region     = var.region
   proxy_address = var.proxy_address
-  auth_token = "cba296805454b9555dee0e39e1489172"
+  auth_token = "d7ef2e77acdfc554f86437d6138fcb4b"
   label-environment = "production"
 }
+
+module "cluster2" {
+  source = "./module-gke-teleport"
+  clustername = "moria"
+  project_id = var.project_id
+  region     = var.region
+  proxy_address = var.proxy_address
+  auth_token = "7a60d96907e2839e7756fa077e15da07"
+  label-environment = "staging"
+}
+
+module "cluster3" {
+  source = "./module-gke-teleport"
+  clustername = "misty-mountains"
+  project_id = var.project_id
+  region     = var.region
+  proxy_address = var.proxy_address
+  auth_token = "157a05349dd1239889248efae889ef01"
+  label-environment = "dev"
+}
+
 
 
