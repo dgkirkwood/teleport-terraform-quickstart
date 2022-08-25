@@ -53,9 +53,4 @@ sudo systemctl restart teleport
 
 EOF
 )
-
-  admin_ssh_key {
-    username   = "dan"
-    public_key = file("~/.ssh/id_rsa.pub")
-  }
 }
