@@ -18,7 +18,7 @@ As per the pre-requisites, please ensure you have an existing Packer build for y
 
 
 ### Terraform Build
-Terraform is used one or more RDS instances, as well as a Linux VM which will facilitate connectivity between your proxy and the databases. You can take a look at the .tf files in this repository to understand what will be built. This is by no means a best-practice deployment, more one that will get you started quickly. 
+Terraform is used to build one or more RDS instances, as well as a Linux VM which will facilitate connectivity between your proxy and the databases. You can take a look at the .tf files in this repository to understand what will be built. This is by no means a best-practice deployment, more one that will get you started quickly. 
 
 1. Navigate to the `/targets/database/aws-rds-mysql` directory
 2. Open the `variables.tf` file and inspect the required variables for this build.
