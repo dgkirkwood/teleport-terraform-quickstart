@@ -52,4 +52,4 @@ crash.log
 *.box
 
 .commands.*
-ssh/config_files/*
+teleport_targets/ssh/config_files/*
