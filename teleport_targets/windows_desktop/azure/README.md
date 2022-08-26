@@ -1,13 +1,13 @@
 # Teleport Quick Start with Terraform
 ## Desktop Access to Windows Server 2016 on Azure
 
-This repository contains Terraform code to stand up a Windows Domain Controller and domain member server, for the purposes of being accessed via Teleport. 
+This repository contains Terraform code to stand up a Windows Domain Controller and domain member server, for the purposes of being accessed via Teleport. This code uses AzureRM Virtual Machine Extensions to create an AD Domain, and to join the client to that domain. This repo uses code from https://github.com/hashicorp/terraform-provider-azurerm/tree/main/examples.
 
 ## Pre-requisites
 Please note the following pre-requisites for using this repository:
 - A working, accessible Teleport cluster. You will need your proxy address as an input to this code. 
-- A Packer build for a linux image for the RDP agent. You can follow the instructions [here](https://github.com/dgkirkwood/teleport-terraform-quickstart/tree/main/teleport_targets/ssh/azure-linux-vm#packer-build)
-- A Teleport join token. You can generate this on your cluster using `tctl tokens add --type=node,windowsdesktop`
+- A Packer build for a linux image for the RDP agent. You can follow the instructions [here](https://github.com/dgkirkwood/teleport-terraform-quickstart/tree/main/teleport_targets/ssh/azure-linux-vm#packer-build) to generate the VM image.
+- A Teleport join token. You can generate this on your Teleport cluster using `tctl tokens add --type=node,windowsdesktop`
 - The Terraform binary on your local machine, or on a machine where you can perform the automated builds. Tested using Terraform v1.2.4
 - Azure credentials. Any of the accepted credential types for automated provisioning on Azure. Examples can be found [here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/getting_started).
 
