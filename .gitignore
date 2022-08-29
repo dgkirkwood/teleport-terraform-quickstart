@@ -53,3 +53,4 @@ crash.log
 
 .commands.*
 teleport_targets/ssh/config_files/*
+license.pem
