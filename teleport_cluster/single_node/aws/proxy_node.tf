@@ -5,9 +5,9 @@ data "aws_ami" "proxy" {
 
   filter {
     name   = "name"
-    values = ["dk-teleport-proxy"]
+    values = [var.image_name]
   }
-  owners = ["165258854585"]
+  owners = [var.image_owner]
 }
 
 

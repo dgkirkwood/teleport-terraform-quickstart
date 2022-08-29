@@ -1,6 +1,3 @@
-# Day 2 basic setup of self hosted Teleport
-# 2 server setup using https://goteleport.com/docs/server-access/getting-started/
-
 terraform {
   required_providers {
     aws = {
@@ -13,5 +10,5 @@ terraform {
 }
 
 provider "aws" {
-  region  = "ap-southeast-2"
+  region  = var.region
 }

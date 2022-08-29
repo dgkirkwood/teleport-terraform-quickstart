@@ -7,6 +7,29 @@ packer {
   }
 }
 
+locals {
+  config_template = templatefile("${path.root}/teleportconfig.tmpl", { cluster_name = var.cluster_name, email = var.email })
+}
+
+// locals {
+//   config_template = templatefile("${path.root}/teleportconfig.tmpl", { token_name = var.ec2_token_name, auth_address = var.auth_address })
+// }
+
+// locals {
+//   config_template = templatefile("${path.root}/teleportconfig.tmpl", { token_name = var.ec2_token_name, auth_address = var.auth_address })
+// }
+
+source "file" "teleport_config" {
+  content = local.config_template
+}
+
+build {
+  source "source.file.teleport_config" {
+    target = "../../config_files/teleport.yaml"
+  }
+}
+
+
 
 source "amazon-ebs" "ubuntu" {
   ami_name      = var.ami_name
@@ -31,7 +54,7 @@ source "amazon-ebs" "ubuntu" {
 }
 
 build {
-  name    = "packer-teleport-proxy"
+  name    = "enterprise-teleport-proxy"
   sources = [
     "source.amazon-ebs.ubuntu"
   ]
@@ -46,23 +69,18 @@ build {
     ]
   }
   provisioner "file" {
-    source = "../../config/license.pem"
+    source = "../../config_files/license.pem"
     destination = "~/license.pem"
   }
-  provisioner "shell" {
-    inline = [
-      "echo Creating license file...",
-      "sudo mv ~/license.pem /var/lib/teleport/license.pem"
-    ]
-  }
   provisioner "file" {
-    source = "../../config/proxy_teleport.yaml"
-    destination = "~/proxy_teleport.yaml"
+    source = "../../config_files/teleport.yaml"
+    destination = "~/teleport.yaml"
   }
   provisioner "shell" {
     inline = [
-      "echo Creating config file...",
-      "sudo mv ~/proxy_teleport.yaml /etc/teleport.yaml"
+      "echo Moving files to correct location...",
+      "sudo mv ~/license.pem /var/lib/teleport/license.pem",
+      "sudo mv ~/teleport.yaml /etc/teleport.yaml"
     ]
   }
 }
