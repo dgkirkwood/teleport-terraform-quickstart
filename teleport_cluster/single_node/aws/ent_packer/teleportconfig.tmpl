@@ -11,13 +11,13 @@ teleport:
 auth_service:
   enabled: "yes"
   listen_addr: 0.0.0.0:3025
-  cluster_name: dk2.teleportdemo.com
+  cluster_name: ${cluster_name}
   proxy_listener_mode: multiplex
   authentication:
     type: local
     second_factor: webauthn
     webauthn:
-      rp_id: dk2.teleportdemo.com
+      rp_id: ${cluster_name}
 ssh_service:
   enabled: "yes"
   labels:
@@ -35,8 +35,8 @@ ssh_service:
 proxy_service:
   enabled: "yes"
   web_listen_addr: 0.0.0.0:443
-  public_addr: dk2.teleportdemo.com:443
+  public_addr: ${cluster_name}:443
   https_keypairs: []
   acme:
     enabled: "yes"
-    email: dan.kirkwood@goteleport.com
+    email: ${email}

@@ -80,7 +80,8 @@ build {
     inline = [
       "echo Moving files to correct location...",
       "sudo mv ~/license.pem /var/lib/teleport/license.pem",
-      "sudo mv ~/teleport.yaml /etc/teleport.yaml"
+      "sudo mv ~/teleport.yaml /etc/teleport.yaml",
+      "sudo systemctl enable teleport"
     ]
   }
 }

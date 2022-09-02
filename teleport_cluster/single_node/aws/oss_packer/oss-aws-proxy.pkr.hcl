@@ -60,6 +60,13 @@ build {
   }
   provisioner "file" {
     source = "../../config_files/teleport.yaml"
-    destination = "/etc/teleport.yaml"
+    destination = "~/teleport.yaml"
+  }
+  provisioner "shell" {
+    inline = [
+      "echo Moving files to correct location...",
+      "sudo mv ~/teleport.yaml /etc/teleport.yaml",
+      "sudo systemctl enable teleport"
+    ]
   }
 }
