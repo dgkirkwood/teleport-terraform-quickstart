@@ -47,7 +47,7 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
   user_data = base64encode(<<EOF
 #!/bin/bash
 sudo hostnamectl set-hostname ${var.linux_hostname}
-echo ${var.jointoken} > /var/lib/teleport/jointoken
+echo ${var.join_token} > /var/lib/teleport/jointoken
 sudo tee -a /etc/teleport.yaml <<'EOT'
 
 windows_desktop_service:
