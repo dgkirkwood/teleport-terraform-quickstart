@@ -19,6 +19,11 @@ resource "azurerm_kubernetes_cluster" "teleport" {
     network_plugin    = "kubenet"
     load_balancer_sku = "standard"
   }
+  api_server_authorized_ip_ranges = ["${chomp(data.http.myip.response_body)}/32"]
+}
+
+data "http" "myip" {
+  url = "http://ipv4.icanhazip.com"
 }
 
 data "azurerm_public_ip" "teleport" {
