@@ -19,29 +19,29 @@ module "cluster1" {
   project_id = var.project_id
   region     = var.region
   proxy_address = var.proxy_address
-  auth_token = "75e2f77f5ec82f8009714c3ae5fd544b"
+  auth_token = "27b20b762bef303b82c91e2ef45f0d27"
   label-environment = "production"
 }
 
-# module "cluster2" {
-#   source = "./module-gke-teleport"
-#   clustername = "moria"
-#   project_id = var.project_id
-#   region     = var.region
-#   proxy_address = var.proxy_address
-#   auth_token = "7a60d96907e2839e7756fa077e15da07"
-#   label-environment = "staging"
-# }
+module "cluster2" {
+  source = "./module-gke-teleport"
+  clustername = "moria"
+  project_id = var.project_id
+  region     = var.region
+  proxy_address = var.proxy_address
+  auth_token = "27b20b762bef303b82c91e2ef45f0d27"
+  label-environment = "staging"
+}
 
-# module "cluster3" {
-#   source = "./module-gke-teleport"
-#   clustername = "misty-mountains"
-#   project_id = var.project_id
-#   region     = var.region
-#   proxy_address = var.proxy_address
-#   auth_token = "157a05349dd1239889248efae889ef01"
-#   label-environment = "dev"
-# }
+module "cluster3" {
+  source = "./module-gke-teleport"
+  clustername = "misty-mountains"
+  project_id = var.project_id
+  region     = var.region
+  proxy_address = var.proxy_address
+  auth_token = "27b20b762bef303b82c91e2ef45f0d27"
+  label-environment = "dev"
+}
 
 
 
