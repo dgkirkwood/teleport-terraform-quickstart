@@ -9,3 +9,7 @@ variable "region" {
 variable "proxy_address" {
   description = "The address of your Teleport proxy, including port"
 }
+
+variable "token" {
+  description = "The auth token for your Teleport proxy"
+}

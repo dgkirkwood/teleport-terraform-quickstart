@@ -19,7 +19,7 @@ module "cluster1" {
   project_id = var.project_id
   region     = var.region
   proxy_address = var.proxy_address
-  auth_token = "27b20b762bef303b82c91e2ef45f0d27"
+  auth_token = var.token
   label-environment = "production"
 }
 
@@ -29,7 +29,7 @@ module "cluster2" {
   project_id = var.project_id
   region     = var.region
   proxy_address = var.proxy_address
-  auth_token = "27b20b762bef303b82c91e2ef45f0d27"
+  auth_token = var.token
   label-environment = "staging"
 }
 
@@ -39,7 +39,7 @@ module "cluster3" {
   project_id = var.project_id
   region     = var.region
   proxy_address = var.proxy_address
-  auth_token = "27b20b762bef303b82c91e2ef45f0d27"
+  auth_token = var.token
   label-environment = "dev"
 }
 
