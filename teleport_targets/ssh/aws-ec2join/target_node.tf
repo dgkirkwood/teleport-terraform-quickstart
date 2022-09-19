@@ -29,7 +29,7 @@ EOF
   }
 
   tags = {
-    Name = "target_node"
+    Name = "${each.value.hostname}"
     Env = "${each.value.environment}"
   }
 }
