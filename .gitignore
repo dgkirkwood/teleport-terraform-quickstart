@@ -53,4 +53,5 @@ crash.log
 
 .commands.*
 teleport_targets/ssh/config_files/*
+teleport_cluster/single_node/aws/config_files/*
 license.pem
