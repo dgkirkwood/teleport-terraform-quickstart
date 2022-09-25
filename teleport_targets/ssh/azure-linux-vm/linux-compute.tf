@@ -44,6 +44,10 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
 
   admin_username                  = "dan"
   disable_password_authentication = true
+  admin_ssh_key {
+    username   = "dan"
+    public_key = file("~/.ssh/id_rsa.pub")
+  }
 
   user_data = base64encode(<<EOF
 #!/bin/bash
