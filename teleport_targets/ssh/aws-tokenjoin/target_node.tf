@@ -22,8 +22,8 @@ resource "aws_instance" "target_nodes" {
 echo "Changing hostname..."
 sudo hostnamectl set-hostname ${each.value.hostname}
 echo "Updating configuration to use token join..."
-sed -i 's/^    method: ec2/    method: token/g' teleport.yaml
-sed -i 's/^    token_name:/    token_name: ${var.join_token}/g' teleport.yaml  
+sudo sed -i 's/^    method: ec2/    method: token/g' /etc/teleport.yaml
+sudo sed -i 's/^    token_name: ec2-token/    token_name: ${var.join_token}/g' /etc/teleport.yaml  
 sudo systemctl restart teleport
 EOF
   metadata_options {

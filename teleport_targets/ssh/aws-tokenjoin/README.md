@@ -8,7 +8,7 @@ Please note the following pre-requisites for using this repository:
 - A working, accessible Teleport cluster. You will need your proxy address as an input to this code. 
 - Network connectivity between these EC2 instances and the mentioned Teleport proxy. The security groups in this repository are very permissive and allow all egress out of the created VPC. 
 - A Packer build for your target instances. Packer code is located [here](https://github.com/dgkirkwood/teleport-terraform-quickstart/tree/main/teleport_targets/ssh/aws-ec2join), run through the Packer build instructions and then return to this guide. 
-- - A Teleport join token. You can generate this on your cluster using `tctl tokens add --type=node`
+- A Teleport join token. You can generate this on your cluster using `tctl tokens add --type=node`
 - The Packer and Terraform binaries on your local machine, or on a machine where you can perform the automated builds. Tested using Packer v1.8.2 and Terraform v1.2.4
 - AWS Credentials. Any of the accepted credential types for automated provisioning on AWS. Examples can be found [here](https://registry.terraform.io/providers/hashicorp/aws/latest/docs).
 
