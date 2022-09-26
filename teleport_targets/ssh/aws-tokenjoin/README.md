@@ -1,5 +1,5 @@
 # Teleport Quick Start with Terraform
-## SSH Access on AWS using EC2 Join
+## SSH Access on AWS using Token Join
 
 This repository contains Packer and Terraform code to stand up SSH targets on AWS, for the purposes of being accessed via Teleport. 
 
