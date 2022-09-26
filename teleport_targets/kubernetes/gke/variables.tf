@@ -13,3 +13,7 @@ variable "proxy_address" {
 variable "token" {
   description = "The auth token for your Teleport proxy"
 }
+
+variable "gke_clusters" {
+  description = "A map describing one or more GKE clusters to be created"
+}
