@@ -10,7 +10,12 @@ resource "aws_iam_policy" "describeinstances" {
 		   "Effect": "Allow",
 		   "Action": "ec2:DescribeInstances",
 		   "Resource": "*"
-	   }
+	   },
+     {
+       "Effect": "Allow",
+       "Action": "sts:AssumeRole",
+       "Resource": "*"
+    }
    ]
 }
 POLICY
