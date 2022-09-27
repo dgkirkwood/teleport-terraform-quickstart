@@ -6,6 +6,10 @@ variable "region" {
   description = "region"
 }
 
+variable "zone" {
+  description = "The zone where your VM will be placed"
+}
+
 variable "prefix" {
   description = "prefix"
 }
