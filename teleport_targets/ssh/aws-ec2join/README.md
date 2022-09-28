@@ -22,7 +22,7 @@ This build will also download the latest version of Teleport by default. Please 
 1. Clone this repository to your local machine 
 2. Navigate to the `/targets/ssh/aws-ec2join/packer` subdirectory
 3. Open the `variables.pkr.hcl` file and inspect the required variables for this build. If you are unsure about satisfying these variables, please see the pre-requisites above. 
-4. Create a file named `variables.auto.pkvars.hcl` to satisfy the input variables. An example format for this file would be: 
+4. Create a file named `variables.auto.pkrvars.hcl` to satisfy the input variables. An example format for this file would be: 
    
    ```
     ec2_token_name = "ec2-token"
