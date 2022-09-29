@@ -52,7 +52,6 @@ crash.log
 *.box
 
 .commands.*
-teleport_targets/ssh/config_files/*
-teleport_cluster/single_node/aws/config_files/*
+**/config_files
 license.pem
 **/certs
