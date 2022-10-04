@@ -38,8 +38,8 @@ EOT
 
 echo "Creating Ansible hosts file..."
 sudo tee -a /home/ubuntu/ansible/hosts <<'EOT'
-${var.machines["target1"]["hostname"]}.${var.proxy_address}
-${var.machines["target2"]["hostname"]}.${var.proxy_address}
+${var.target_machines["target1"]["hostname"]}.${var.proxy_address}
+${var.target_machines["target2"]["hostname"]}.${var.proxy_address}
 EOT
 
 echo "Creating example Ansible playbook..."
