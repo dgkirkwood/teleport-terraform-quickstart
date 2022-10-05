@@ -12,7 +12,7 @@ data "aws_ami" "target" {
 
 resource "aws_instance" "target_nodes" {
   ami           = data.aws_ami.target.id
-  instance_type = "t2.micro"
+  instance_type = "t3.medium"
   subnet_id = aws_subnet.server.id
   vpc_security_group_ids = [ aws_security_group.serveraccess.id ]
   key_name = var.key_name
