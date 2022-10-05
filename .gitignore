@@ -52,6 +52,4 @@ crash.log
 *.box
 
 .commands.*
-**/config_files
 license.pem
-**/certs
