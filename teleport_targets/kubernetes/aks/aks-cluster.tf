@@ -6,7 +6,7 @@ resource "azurerm_kubernetes_cluster" "teleport" {
 
   default_node_pool {
     name           = "teleportpool"
-    node_count     = 2
+    node_count     = 3
     vm_size        = "Standard_B2s"
     vnet_subnet_id = azurerm_subnet.teleport.id
   }
