@@ -8,6 +8,7 @@ resource "aws_route53_record" "proxy" {
   type    = "A"
   ttl     = "100"
   records = [aws_instance.proxy_node.public_ip]
+  allow_overwrite = true
 }
 
 resource "aws_route53_record" "wildcard" {
@@ -16,5 +17,6 @@ resource "aws_route53_record" "wildcard" {
   type    = "A"
   ttl     = "100"
   records = [aws_instance.proxy_node.public_ip]
+  allow_overwrite = true
 }
 
