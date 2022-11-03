@@ -103,7 +103,7 @@ EOF
   }
 
   tags = {
-    Name = "target_node"
+    Name = "ansible_control_node"
     Env = var.control_env
   }
 }
