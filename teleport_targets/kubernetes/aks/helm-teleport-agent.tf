@@ -14,6 +14,7 @@ resource "helm_release" "teleportagent" {
   chart = "teleport-kube-agent"
   namespace = "teleport-agent-${each.value.environment}"
   create_namespace = true
+  version = var.teleport_version
   set {
     name = "kubeClusterName"
     value = each.value.clustername

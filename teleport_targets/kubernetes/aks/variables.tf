@@ -19,3 +19,7 @@ variable "auth_token" {
 variable "cluster_flavours" {
   type = map
 }
+
+variable "teleport_version" {
+  
+}
