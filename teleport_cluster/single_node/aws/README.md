@@ -5,7 +5,7 @@ This repository contains Packer and Terraform code to stand up a Teleport Proxy 
 
 ## Pre-requisites
 Please note the following pre-requisites for using this repository:
-- A domain name which can be used for the public address of your server. This code assumes you have an existing hosted zone on AWS, and DNS records are created using that hosted zone. This proxy also uses Lets Encrypt for certificates, which requires a public DNS address.
+- A Route 53 hosted zone on AWS. This terraform code will create Route 53 'A' records using this hosted zone. Please have a host name ready as an input for the Terraform code.
 - A pre-existing AWS VPC and subnet for your Packer builds. Please note you will require the ID for both.
 - The Packer and Terraform binaries on your local machine, or on a machine where you can perform the automated builds. Tested using Packer v1.8.2 and Terraform v1.2.4
 - AWS Credentials. Any of the accepted credential types for automated provisioning on AWS. Examples can be found [here](https://registry.terraform.io/providers/hashicorp/aws/latest/docs).
