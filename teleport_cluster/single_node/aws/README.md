@@ -21,7 +21,7 @@ To see the steps contained within the Packer build, see the file `packer/<oss_pa
 1. Clone this repository to your local machine 
 2. Navigate to the `/teleport_cluster/single_node/aws/<oss or ent>_packer` subdirectory
 3. Open the `variables.pkr.hcl` file and inspect the required variables for this build. If you are unsure about satisfying these variables, please see the pre-requisites above. 
-4. Create a file named `variables.auto.pkvars.hcl` to satisfy the input variables. An example format for this file would be: 
+4. Create a file named `variables.auto.pkrvars.hcl` to satisfy the input variables. An example format for this file would be: 
    
    ```
    cluster_name = "mycluster.fqdn.com"
