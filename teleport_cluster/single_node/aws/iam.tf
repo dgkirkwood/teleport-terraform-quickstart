@@ -1,5 +1,5 @@
 resource "aws_iam_policy" "describeinstances" {
-  name = "proxy-ec2decribe"
+  name = "${var.prefix}-proxy-ec2decribe"
   path = "/"
   description = "Describe EC2"
   policy = <<POLICY
@@ -24,7 +24,7 @@ POLICY
 
 
 resource "aws_iam_role" "ec2_assume" {
-  name = "proxy-ec2_assume"
+  name = "${var.prefix}-proxy-ec2_assume"
   assume_role_policy = <<POLICY
 {
     "Version": "2012-10-17",
@@ -48,7 +48,7 @@ resource "aws_iam_role_policy_attachment" "ec2_describe" {
 }
 
 resource "aws_iam_instance_profile" "ec2_describe" {
-  name = "proxy-ec2_describe"
+  name = "${var.prefix}-proxy-ec2_describe"
   role = aws_iam_role.ec2_assume.name
 }
   

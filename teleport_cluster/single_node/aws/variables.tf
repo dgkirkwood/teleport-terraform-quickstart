@@ -22,3 +22,6 @@ variable "key" {
   description = "An existing SSH key for direct access to the Proxy via SSH"
 }
 
+variable "prefix" {
+  description = "A few characters to ensure your resources are unique, for example 'dk'"
+}
