@@ -8,7 +8,7 @@ packer {
 }
 
 locals {
-  config_template = templatefile("${path.root}/teleportconfig.tmpl", { token_name = var.ec2_token_name, auth_address = var.auth_address, db_name = var.db_name })
+  config_template = templatefile("${path.root}/teleportconfig.tmpl", { token_name = var.ec2_token_name, auth_address = var.auth_address, db_name = var.db_name, environment = var.environment })
 }
 
 source "file" "teleport_config" {
@@ -92,6 +92,7 @@ build {
   }
   provisioner "shell" {
     inline = [
+      "sleep 20",
       "echo Bootstrapping database...",
       "mongosh --eval 'db.getSiblingDB(\"$external\").runCommand( { createUser: \"CN=${var.user1}\", roles: [ { role: \"readWriteAnyDatabase\", db: \"admin\" }] })'",
       "mongosh --eval 'db.getSiblingDB(\"$external\").runCommand( { createUser: \"CN=${var.user2}\", roles: [ { role: \"readWriteAnyDatabase\", db: \"admin\" }] })'",
