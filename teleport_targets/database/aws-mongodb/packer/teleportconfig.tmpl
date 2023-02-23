@@ -19,15 +19,12 @@ proxy_service:
     enabled: false
 db_service:
   enabled: "yes"
-  resources:
-  - labels:
-      "*": "*"
   databases:
   - name: ${db_name}
     protocol: mongodb
     uri: localhost:27017
     static_labels:
-      env: ${environment} 
+      env: ${environment}
 ssh_service:
   enabled: "yes"
   labels:
