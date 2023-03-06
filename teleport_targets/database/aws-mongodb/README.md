@@ -24,7 +24,13 @@ The build will also populate the MongoDB Database with two users and a single pi
 1. Clone this repository to your local machine 
 2. Navigate to the `/teleport_targets/database/aws-mongodb/packer` subdirectory
 3. Open the `variables.pkr.hcl` file and inspect the required variables for this build. If you are unsure about satisfying these variables, please see the pre-requisites above. 
-4. Create a file named `variables.auto.pkrvars.hcl` to satisfy the input variables. An example format for this file would be: 
+4. Create database certificates in the `cert` dir. These certificates are uploaded and used as the allowed certs to connect with.
+
+```bash
+ tctl auth sign --format=mongodb --host=localhost --out=mongo --ttl=10190h
+```
+
+5. Create a file named `variables.auto.pkrvars.hcl` to satisfy the input variables. An example format for this file would be: 
    
    ```
    ec2_token_name = "ec2-token"
@@ -38,8 +44,8 @@ The build will also populate the MongoDB Database with two users and a single pi
    user2 = "bob"
    environment = "dev"
     ```
-5. Run `packer init .` to ensure Packer has the required plugins downloaded
-6. Run `packer build .` to begin the image build
+6. Run `packer init .` to ensure Packer has the required plugins downloaded
+7. Run `packer build .` to begin the image build
 
 **Please note that image builds will occasionally fail due to connectivity or package repository errors. If you see a failed build, run the build command again. If you see continued errors please raise an issue on this repository.**
 
@@ -70,3 +76,24 @@ Terraform is used to create one or more target machines using the image from you
 5. Run `terraform plan` to see the resources created by this code and ensure there are no input or syntax errors
 6. Run `terraform apply` to create the target machines. 
 7. On the completion of the Terraform run, you will see the public IP addresses of the machines created. Your machines should also succesfully join your Teleport cluster automatically. If the machines do not join, you can SSH to the target and check the Teleport logs using `systemctl status teleport`. 
+
+
+### Test Connection
+
+Have a user that has `bob` and `alice` as available db users or create a local one
+
+```bash
+tctl users add \
+  --roles=access \
+  --db-users=\* \
+  --db-names=\* \
+  alice
+```
+
+Now you should be able to connect from CLI
+
+```bash
+tsh db connect --db-user=alice my-mongodb
+```
+
+
