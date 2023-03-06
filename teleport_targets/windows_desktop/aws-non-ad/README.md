@@ -7,7 +7,7 @@ This repository contains Terraform and Packer code to stand up a Windows Server 
 
 ## Pre-requisites
 Please note the following pre-requisites for using this repository:
-- A working, accessible Teleport cluster. You will need your proxy address as an input to this code.
+- A working, accessible Teleport cluster. You will need your proxy address as an input to this code. Note Teleport Enterprise v12 or higher is required.
 - An authenticated Teleport session or access to your Auth server to be able to generate a file from your Teleport CA. See the Packer section for more.
 - An existing AWS VPC and Subnet for your Packer build. You will need the ID of both as an input to the Packer code below. 
 - EC2 join configured on your Teleport cluster, with the `WindowsDesktop` role included. See more on creating an EC2 join token [here](https://goteleport.com/docs/management/guides/joining-nodes-aws-ec2/).
