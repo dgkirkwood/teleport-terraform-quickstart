@@ -2,6 +2,7 @@ resource "aws_cloudfront_distribution" "tls" {
   origin {
     domain_name = aws_s3_bucket.teleport-auto-upgrade.bucket_regional_domain_name
     origin_id = "teleport-s3-origin"
+    origin_access_control_id = aws_cloudfront_origin_access_control.teleport.id
   }
   enabled = true
   aliases = [ "${var.endpoint_name}.${var.hosted_zone}" ]
@@ -23,4 +24,11 @@ resource "aws_cloudfront_distribution" "tls" {
       restriction_type = "none"
     }
   }
+}
+
+resource "aws_cloudfront_origin_access_control" "teleport" {
+  name = "teleport"
+  origin_access_control_origin_type = "s3"
+  signing_behavior = "always"
+  signing_protocol = "sigv4"
 }
