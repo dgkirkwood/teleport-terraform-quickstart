@@ -6,7 +6,7 @@ This code will create an endpoint for Teleport auto-upgrades, as described [here
 
 Starting with AWS, The endpoint is hosted on S3, via CloudFront for TLS with an ACM certificate. 
 
-To test the AWS code, create a `terraform.tfvars` file with the following content
+To test the AWS code, create a `terraform.tfvars` file in the `/aws/` folder with the following content
 ```
 region = "us-west-2"
 bucket-name = "your-unique-bucket-name"
