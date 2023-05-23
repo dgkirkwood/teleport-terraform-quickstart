@@ -19,9 +19,31 @@ Where `hosted_zone` is an existing Route53 hosted zone.
 
 `critical` is whether the update is critical or not. Must be yes or no. 
 
-Then simply `terraform init` and `terraform apply`!
+To run:
 
-You will see an output which is what you will add to the updater endpoint configuration as per the [enroll instructions](dk-update3.teleportdemo.com/current).
+```bash
+terraform init
+# Confirm the settings before applying
+terraform plan
+# apply
+terraform apply
+# After running you will get this type of output
+# cloudfront_domain = "your-endpoint-name.example-route53-zone.com/current"
+```
+
+You will see an output which is what you will add to the updater endpoint configuration as per the [enroll instructions](https://goteleport.com/docs/management/operations/enroll-agent-into-automatic-updates/).
+
+To test:
+
+```bash
+# Replace the endpoint with yours
+AGENT_ENDPOINT=https://agentupdate.example.com/current
+curl ${AGENT_ENDPOINT}/version
+# version number
+curl ${AGENT_ENDPOINT}/critical
+# no or yes
+```
+
+Note that any other endpoint attempt will return a `AccessDenied` error by default.
 
 Google examples and more to come.
-
