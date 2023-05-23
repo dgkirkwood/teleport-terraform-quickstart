@@ -1,10 +1,8 @@
 # Teleport Auto-Upgrade Endpoint
 
-**Please note this code and it's documentation is a work in progress.**
+This code will create version server for Teleport auto-upgrades, as described [here](https://goteleport.com/docs/management/operations/self-hosted-automatic-agent-updates/?scope=enterprise).
 
-This code will create an endpoint for Teleport auto-upgrades, as described [here](https://goteleport.com/docs/management/operations/self-hosted-automatic-agent-updates/?scope=enterprise).
-
-Starting with AWS, The endpoint is hosted on S3, via CloudFront for TLS with an ACM certificate. 
+The web server is hosted on S3, using CloudFront and ACM for TLS termination. Please note a pre-requisite for using this code is an existing hosted zone on Route53.
 
 To test the AWS code, create a `terraform.tfvars` file in the `/aws/` folder with the following content
 ```
@@ -16,7 +14,9 @@ desired_version = "13.0.2"
 critical = "no"
 ```
 Where `hosted_zone` is an existing Route53 hosted zone.
-`desired_version` is the target version of Teleport for your agents. This should match your auth and proxy versions
+
+`desired_version` is the target version of Teleport for your agents. This should match your auth and proxy versions.
+
 `critical` is whether the update is critical or not. Must be yes or no. 
 
 Then simply `terraform init` and `terraform apply`!
