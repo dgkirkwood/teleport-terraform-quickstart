@@ -15,9 +15,15 @@ critical = "no"
 ```
 Where `hosted_zone` is an existing Route53 hosted zone.
 
+`bucket-name` is the created bucket to store the update settings.
+
 `desired_version` is the target version of Teleport for your agents. This should match your auth and proxy versions.
 
 `critical` is whether the update is critical or not. Must be yes or no. 
+
+Your site will be `https://<endpoint_name>.<hosted_zone>/current` so that would be https://your-endpoint-name.example-route43-zone.com/current with
+the above values.
+
 
 To run:
 
