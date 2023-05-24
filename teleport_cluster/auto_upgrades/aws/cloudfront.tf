@@ -7,7 +7,6 @@ resource "aws_cloudfront_distribution" "tls" {
   enabled = true
   aliases = [ "${var.endpoint_name}.${var.hosted_zone}" ]
   viewer_certificate {
-    cloudfront_default_certificate = true
     acm_certificate_arn = aws_acm_certificate.updater.arn
     ssl_support_method = "sni-only"
   }
@@ -17,7 +16,7 @@ resource "aws_cloudfront_distribution" "tls" {
     viewer_protocol_policy = "https-only"
     target_origin_id = "teleport-s3-origin"
     #Caching optimised managed policy
-    cache_policy_id  = "658327ea-f89d-4fab-a63d-7e88639e58f6"
+    cache_policy_id  = "4135ea2d-6df8-44a3-9df3-4b5a84be39ad"
   }
   restrictions {
     geo_restriction {
