@@ -27,7 +27,7 @@ resource "aws_cloudfront_distribution" "tls" {
 }
 
 resource "aws_cloudfront_origin_access_control" "teleport" {
-  name = "teleport"
+  name = "${var.endpoint_name}-teleport"
   origin_access_control_origin_type = "s3"
   signing_behavior = "always"
   signing_protocol = "sigv4"
