@@ -81,6 +81,10 @@ build {
     source = "./postgres-node.yaml"
     destination = "~/teleport.yaml"
   }
+  provisioner "file" {
+    source = "./keys/"
+    destination = "~/"
+  }
   provisioner "shell" {
     inline = [
       #"echo 'deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main' > /etc/apt/sources.list.d/pgdg.list",
@@ -95,7 +99,13 @@ build {
       "echo Creating config file...",
       "sudo mv ~/teleport.yaml /etc/teleport.yaml",
       "echo Starting Teleport service...",
-      "sudo systemctl enable teleport.service"
+      "sudo systemctl enable teleport.service",
+      "sudo chown postgres:postgres ~/server.crt ~/server.cas ~/server.key",
+      "sudo mv ~/server.cas ~/server.crt /etc/ssl/certs/",
+      "sudo mv ~/server.key /etc/ssl/private/",
+      "sudo tee -a /etc/postgresql/14/main/postgresql.conf <<'EOT'\nssl = on\nssl_cert_file = '/etc/ssl/certs/server.crt'\nssl_key_file = '/etc/ssl/private/server.key'\nssl_ca_file = '/etc/ssl/certs/server.cas'\nEOT",
+      "sudo tee -a /etc/postgresql/14/main/pg_hba.conf <<'EOT'\nhostssl all             all             ::/0                    cert\nhostssl all             all             0.0.0.0/0               cert\nEOT",
+      "sudo systemctl restart postgresql"
     ]
   }
 }
