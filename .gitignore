@@ -53,3 +53,10 @@ crash.log
 
 .commands.*
 license.pem
+
+# No key material to be sent to github
+*.cer
+*.crt
+*.key
+*.cas
+
