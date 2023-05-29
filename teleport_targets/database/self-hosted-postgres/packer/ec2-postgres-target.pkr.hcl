@@ -17,7 +17,7 @@ source "file" "teleport_config" {
 
 build {
   source "source.file.teleport_config" {
-    target = "../../config_files/aws_ssh_node.yaml"
+    target = "./postgres-node.yaml"
   }
 }
 
@@ -78,12 +78,12 @@ build {
     ]
   }
   provisioner "file" {
-    source = "../../config_files/aws_ssh_node.yaml"
+    source = "./postgres-node.yaml"
     destination = "~/teleport.yaml"
   }
   provisioner "shell" {
     inline = [
-      "echo 'deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main' > /etc/apt/sources.list.d/pgdg.list",
+      #"echo 'deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main' > /etc/apt/sources.list.d/pgdg.list",
       "wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -",
       "sudo apt-get update",
       "sudo apt-get -y install postgresql"
