@@ -104,8 +104,17 @@ build {
       "sudo mv ~/server.cas ~/server.crt /etc/ssl/certs/",
       "sudo mv ~/server.key /etc/ssl/private/",
       "sudo tee -a /etc/postgresql/14/main/postgresql.conf <<'EOT'\nssl = on\nssl_cert_file = '/etc/ssl/certs/server.crt'\nssl_key_file = '/etc/ssl/private/server.key'\nssl_ca_file = '/etc/ssl/certs/server.cas'\nEOT",
+      # Remove line in the auth file which prevents cert based auth
+      "sudo sed -i '97d' /etc/postgresql/14/main/pg_hba.conf",
       "sudo tee -a /etc/postgresql/14/main/pg_hba.conf <<'EOT'\nhostssl all             all             ::/0                    cert\nhostssl all             all             0.0.0.0/0               cert\nEOT",
       "sudo systemctl restart postgresql"
+    ]
+  }
+  provisioner "shell" {
+    inline = [
+      "echo Bootstrapping postgres...",
+      "sudo su -c psql - postgres <<EOF\nCREATE USER developer;\nCREATE DATABASE products;\nCREATE DATABASE customers;\nEOF",
+      "sudo su -c psql - postgres <<EOF\nGRANT ALL PRIVILEGES ON database customers TO developer;\nGRANT ALL PRIVILEGES ON database products TO developer;\nEOF"
     ]
   }
 }
