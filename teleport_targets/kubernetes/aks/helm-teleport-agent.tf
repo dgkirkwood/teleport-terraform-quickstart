@@ -39,5 +39,16 @@ resource "helm_release" "teleportagent" {
     name = "labels.region"
     value = var.location
   }
+  set {
+    name = "labels.node-count"
+    value = azurerm_kubernetes_cluster.teleport.default_node_pool[0].node_count
+  }
+  set {
+    name = "labels.kube-version"
+    value = azurerm_kubernetes_cluster.teleport.kubernetes_version
+  }
+  set {
+    name = "labels.fqdn"
+    value = azurerm_kubernetes_cluster.teleport.fqdn
+  }
 }
-

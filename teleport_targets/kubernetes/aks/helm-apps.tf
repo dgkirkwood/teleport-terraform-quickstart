@@ -5,13 +5,13 @@ resource "helm_release" "ahoy" {
 }
 
 resource "helm_release" "jenkins" {
-  name = "jenkins"
+  name = "apache"
   repository = "https://charts.bitnami.com/bitnami"
-  chart = "jenkins"
+  chart = "apache"
 }
 
 resource "helm_release" "prometheus" {
-  name = "prometheus"
-  repository = "https://prometheus-community.github.io/helm-charts"
-  chart = "prometheus"
+  name = "grafana"
+  repository = "https://charts.bitnami.com/bitnami"
+  chart = "grafana"
 }
