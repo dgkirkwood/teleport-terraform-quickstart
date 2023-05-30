@@ -1,4 +1,4 @@
-version: v2
+version: v3
 teleport:
   data_dir: /var/lib/teleport
   join_params:
@@ -11,8 +11,7 @@ teleport:
       output: text
   ca_pin: []
   diag_addr: ""
-  auth_servers:
-    - ${auth_address}
+  proxy_server: ${auth_address}
 auth_service:
     enabled: false
 proxy_service:
