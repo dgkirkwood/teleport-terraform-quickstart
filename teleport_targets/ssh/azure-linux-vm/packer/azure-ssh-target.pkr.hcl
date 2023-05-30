@@ -48,11 +48,15 @@ build {
   provisioner "shell" {
     inline = [
       "echo Installing Teleport....",
-      "sudo curl https://deb.releases.teleport.dev/teleport-pubkey.asc -o /usr/share/keyrings/teleport-archive-keyring.asc",
-      "echo 'deb [signed-by=/usr/share/keyrings/teleport-archive-keyring.asc] https://deb.releases.teleport.dev/ stable main' | sudo tee /etc/apt/sources.list.d/teleport.list > /dev/null",
-      "sudo apt-get update",
-      "sleep 10",
-      "sudo apt-get install teleport"
+      "TELEPORT_VERSION=${var.teleport_version}",
+      "curl -O https://cdn.teleport.dev/teleport-v$TELEPORT_VERSION-linux-amd64-bin.tar.gz",
+      "tar -xzf teleport-v$TELEPORT_VERSION-linux-amd64-bin.tar.gz",
+      "cd teleport",
+      "sudo ./install",
+      "sudo cp examples/systemd/teleport.service /etc/systemd/system",
+      "sudo mkdir /etc/teleport",
+      "sudo rm -rf ~/teleport/",
+      "sudo rm -rf ~/teleport-v$TELEPORT_VERSION-linux-amd64-bin.tar.gz"
     ]
   }
   provisioner "file" {
