@@ -14,7 +14,11 @@ variable "auth_token" {
   description = "The auth token generated from the Teleport server"
 }
 
-variable "label_environment" {
-  description = "The environment of the cluster"
+
+variable "cluster_flavours" {
+  type = map
 }
 
+variable "teleport_version" {
+  description = "The Teleport agent version to install via Helm"
+}

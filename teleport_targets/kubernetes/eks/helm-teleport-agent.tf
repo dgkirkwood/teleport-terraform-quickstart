@@ -7,14 +7,16 @@ provider "helm" {
 }
 
 resource "helm_release" "teleportagent" {
-  name = "teleportagent"
+  for_each = var.cluster_flavours
+  name = "teleportagent-${each.value.environment}"
   repository = "https://charts.releases.teleport.dev"
   chart = "teleport-kube-agent"
-  namespace = "teleport-agent"
+  namespace = "teleport-agent-${each.value.environment}"
   create_namespace = true
+  version = var.teleport_version
   set {
     name = "kubeClusterName"
-    value = var.clustername
+    value = each.value.clustername
   }
   set {
     name = "proxyAddr"
@@ -26,7 +28,7 @@ resource "helm_release" "teleportagent" {
   }
   set {
     name = "labels.environment"
-    value = var.label_environment
+    value = each.value.environment
   }
   set {
     name = "labels.cloud"
@@ -35,5 +37,9 @@ resource "helm_release" "teleportagent" {
   set {
     name = "labels.region"
     value = var.region
+  }
+  set {
+    name = "labels.k8s-version"
+    value = module.eks.cluster_version
   }
 }
