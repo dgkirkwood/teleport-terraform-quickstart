@@ -15,3 +15,6 @@ variable "image_rg" {
 }
 
 
+variable "teleport_version" {
+    type = string
+}
