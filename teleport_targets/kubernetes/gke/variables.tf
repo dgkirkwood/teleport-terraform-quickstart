@@ -14,6 +14,18 @@ variable "token" {
   description = "The auth token for your Teleport proxy"
 }
 
-variable "gke_clusters" {
-  description = "A map describing one or more GKE clusters to be created"
+variable "cluster_name" {
+  
+}
+
+variable "environment" {
+  
+}
+
+variable "cluster_flavours" {
+  type = map
+}
+
+variable "teleport_version" {
+  
 }

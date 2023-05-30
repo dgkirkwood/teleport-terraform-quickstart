@@ -27,3 +27,10 @@ variable "label-environment" {
   description = "Env label for Teleport RBAC"
 }
 
+variable "cluster_flavours" {
+  type = map
+}
+
+variable "teleport_version" {
+  
+}
