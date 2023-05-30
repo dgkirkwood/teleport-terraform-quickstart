@@ -1,0 +1,51 @@
+version: v3
+teleport:
+  data_dir: /var/lib/teleport
+  join_params:
+    token_name: ${token_name}
+    method: ec2
+  log:
+    output: stderr
+    severity: INFO
+    format:
+      output: text
+  ca_pin: []
+  diag_addr: ""
+  proxy_server: ${auth_address}
+auth_service:
+    enabled: false
+proxy_service:
+    enabled: false
+ssh_service:
+  enabled: "yes"
+  labels:
+    role: target
+  commands:
+  - name: hostname
+    command: [hostname]
+    period: 1m0s
+  - name: arch
+    command: [uname, -p]
+    period: 1h0m0s
+  - name: kernel
+    command: [uname, -r]
+    period: 1h0m0s
+  - name: uptime
+    command: [uptime, -p]
+    period: 1h0m0s
+  - name: internal
+    command: [curl, "http://169.254.169.254/latest/meta-data/local-ipv4"]
+    period: 1h0m0s
+  - name: external
+    command: [curl, "http://169.254.169.254/latest/meta-data/public-ipv4"]
+    period: 1h0m0s
+db_service:
+  enabled: "yes"
+  databases:
+  - name: ${database_name}
+    description: "Development database"
+    protocol: "mysql"
+    uri: "localhost:3306"
+    static_labels:
+      env: "dev"
+      role: "db"
