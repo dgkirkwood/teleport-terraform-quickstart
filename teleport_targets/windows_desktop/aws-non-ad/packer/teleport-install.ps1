@@ -1,4 +1,3 @@
-Invoke-WebRequest -Uri https://github.com/gravitational/teleport/releases/download/v12.0.0-passwordless-windows/teleport-windows-auth-setup-v12.0.0-amd64.zip -OutFile C:\Users\Administrator\Downloads\teleport.zip
-Expand-Archive -Path "C:\Users\Administrator\Downloads\teleport.zip" -DestinationPath "C:\Users\Administrator\Downloads\"
+Invoke-WebRequest -Uri https://cdn.teleport.dev/teleport-windows-auth-setup-v13.0.0-amd64.exe -OutFile C:\Users\Administrator\Downloads\teleport_windows.exe
 cd "C:\Users\Administrator\Downloads"
-.\teleport-windows-auth-setup.exe install --cert=C:\Users\Administrator\Downloads\teleport.cer
+.\teleport_windows.exe install --cert=C:\Users\Administrator\Downloads\teleport.cer
