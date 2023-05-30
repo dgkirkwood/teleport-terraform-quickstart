@@ -25,6 +25,9 @@ sudo tee -a /etc/teleport.yaml <<'EOT'
 
   enhanced_recording:
     enabled: true
+    cgroup_path: /cgroup2
+  restricted_session:
+    enabled: true
 EOT
 sudo systemctl restart teleport
 EOF
