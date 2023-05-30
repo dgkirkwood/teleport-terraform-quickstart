@@ -23,3 +23,6 @@ variable "subnet_id" {
     type = string
 }
 
+variable "teleport_version" {
+    type = string
+}
