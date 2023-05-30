@@ -8,6 +8,7 @@ Please note the following pre-requisites for using this repository:
 - A working, accessible Teleport cluster. You will need your proxy address as an input to this code. 
 - An existing VPC and Subnet to run your Packer builds
 - A Teleport EC2 join token. See how to configure this [here](https://goteleport.com/docs/management/join-services-to-your-cluster/aws-ec2/).
+- A set of certificates generated from your Teleport cluster, placed in a directory `packer/keys`. You can generate these keys using `tctl auth sign --format=db --host=localhost --out=server --ttl=720h`. This will generate three files (`server.crt`, `server.key`,`server.cas`) which you should place in `packer/keys`.
 - The Terraform binary on your local machine, or on a machine where you can perform the automated builds. Tested using Terraform v1.2.4
 - AWS Credentials. Any of the accepted credential types for automated provisioning on AWS. Examples can be found [here](https://registry.terraform.io/providers/hashicorp/aws/latest/docs).
 
