@@ -60,5 +60,5 @@ build {
       "Install-AdcsCertificationAuthority -CAType EnterpriseRootCa -CACommonName ${var.virtual_machine_fqdn} -ValidityPeriod Years -ValidityPeriodUnits 3  -Force"
     ]
   }
-
+  
 }
