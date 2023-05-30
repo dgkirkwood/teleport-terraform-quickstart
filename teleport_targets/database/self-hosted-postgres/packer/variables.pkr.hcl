@@ -26,3 +26,11 @@ variable "subnet_id" {
 variable "teleport_version" {
     type = string
 }
+
+variable "postgres_user" {
+    type = string
+}
+
+variable "database_name" {
+    type = string
+}

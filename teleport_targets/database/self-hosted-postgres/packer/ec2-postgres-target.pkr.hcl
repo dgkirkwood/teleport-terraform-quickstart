@@ -114,8 +114,8 @@ build {
     inline = [
       "echo Bootstrapping postgres...",
       "sudo su -c psql - postgres <<EOF\nCREATE USER ${var.postgres_user};\nCREATE DATABASE ${var.database_name};\nCREATE DATABASE customers;\nEOF",
-      "sudo su -c psql - postgres <<EOF\nGRANT ALL PRIVILEGES ON database customers TO developer;\nGRANT ALL PRIVILEGES ON database products TO developer;\nEOF",
-      "sudo su -c psql - postgres <<EOF\nCREATE TABLE vendors (vendorID int, vendorname varchar(255), website varchar(255));\ninsert into vendors values (1, 'Teleport', 'www.goteleport.com');\nEOF"
+      "sudo su -c psql - postgres <<EOF\nGRANT ALL PRIVILEGES ON database customers TO developer;\nGRANT ALL PRIVILEGES ON database ${var.database_name} TO ${var.postgres_user};\nEOF",
+      "sudo su -c psql - postgres <<EOF\nUSE ${var.database_name};\nCREATE TABLE vendors (vendorID int, vendorname varchar(255), website varchar(255));\ninsert into vendors values (1, 'Teleport', 'www.goteleport.com');\nEOF"
     ]
   }
 }
