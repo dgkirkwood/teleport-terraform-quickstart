@@ -4,7 +4,7 @@ resource "aws_db_instance" "teleport-rds" {
   instance_class                      = "db.t3.medium"
   allocated_storage                   = 5
   engine                              = "mysql"
-  engine_version                      = "8.0.27"
+  engine_version                      = "8.0.32"
   username                            = var.db_admin
   password                            = var.db_password
   db_subnet_group_name                = aws_db_subnet_group.teleport-rds.name
