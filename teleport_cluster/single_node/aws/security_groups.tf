@@ -23,36 +23,36 @@ resource "aws_security_group_rule" "allow_tls" {
 
 }
 
-resource "aws_security_group_rule" "allow_teleport_ssh" {
-  type = "ingress"
-  from_port = 3022
-  to_port = 3022
-  security_group_id = aws_security_group.serveraccess.id
-  protocol = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
+# resource "aws_security_group_rule" "allow_teleport_ssh" {
+#   type = "ingress"
+#   from_port = 3022
+#   to_port = 3022
+#   security_group_id = aws_security_group.serveraccess.id
+#   protocol = "tcp"
+#   cidr_blocks = ["0.0.0.0/0"]
 
-}
+# }
 
-resource "aws_security_group_rule" "allow_proxy_ssh" {
-  type = "ingress"
-  from_port = 3023
-  to_port = 3023
-  security_group_id = aws_security_group.serveraccess.id
-  protocol = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
+# resource "aws_security_group_rule" "allow_proxy_ssh" {
+#   type = "ingress"
+#   from_port = 3023
+#   to_port = 3023
+#   security_group_id = aws_security_group.serveraccess.id
+#   protocol = "tcp"
+#   cidr_blocks = ["0.0.0.0/0"]
 
-}
+# }
 
 
-resource "aws_security_group_rule" "allow_auth" {
-  type = "ingress"
-  from_port = 3025
-  to_port = 3025
-  security_group_id = aws_security_group.serveraccess.id
-  protocol = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
+# resource "aws_security_group_rule" "allow_auth" {
+#   type = "ingress"
+#   from_port = 3025
+#   to_port = 3025
+#   security_group_id = aws_security_group.serveraccess.id
+#   protocol = "tcp"
+#   cidr_blocks = ["0.0.0.0/0"]
 
-}
+# }
 
 resource "aws_security_group_rule" "egress" {
   type = "egress"
