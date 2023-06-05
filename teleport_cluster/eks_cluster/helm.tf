@@ -6,24 +6,24 @@ provider "helm" {
   }
 }
 
-# resource "helm_release" "nginx" {
-#     repository = "https://kubernetes.github.io/ingress-nginx"
-#     chart = "ingress-nginx"
-#     namespace = "ingress-nginx"
-#     create_namespace = true
-#     name = "teleport-cluster-ingress"
+resource "helm_release" "nginx" {
+    repository = "https://kubernetes.github.io/ingress-nginx"
+    chart = "ingress-nginx"
+    create_namespace = false
+    name = "nginx"
+}
 
+# resource "helm_release" "cert-manager" {
+  
 # }
 
-# resource "helm_release" "teleport" {
-#   repository = "https://charts.releases.teleport.dev"
-#   chart = "teleport-cluster"
-#   name=  "teleport-cluster"
-#   version = var.teleport_version
-#   create_namespace = true
-#   namespace = "teleport-cluster"
-#   set {
-#     name = "clusterName"
-#     value = var.cluster_fqdn
-#   }
-# }
+resource "helm_release" "teleport" {
+  repository = "https://charts.releases.teleport.dev"
+  chart = "teleport-cluster"
+  name=  "teleport"
+  version = var.teleport_version
+  create_namespace = false
+  values = [
+    file("k8sfiles/teleport-values.yaml")
+  ]
+}

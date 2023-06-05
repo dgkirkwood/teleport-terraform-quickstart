@@ -1,0 +1,6 @@
+clusterName: dk-k8s.teleportdemo.com
+persistence:
+  enabled: false
+proxyListenerMode: multiplex
+service:
+  type: ClusterIP
