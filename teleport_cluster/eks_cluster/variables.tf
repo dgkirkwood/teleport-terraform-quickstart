@@ -18,3 +18,11 @@ variable "hosted_zone" {
 variable "teleport_version" {
   description = "The version of the Teleport cluster you would like to install"
 }
+
+variable "ingress_name" {
+  description = "The name of the ingress controller"
+}
+
+variable "email_address" {
+  description = "The email address used for Lets Encrypt certs"
+}
