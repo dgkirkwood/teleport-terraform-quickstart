@@ -1,12 +1,3 @@
-provider "kubernetes" {
-  host                   = module.eks.cluster_endpoint
-  cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
-  exec {
-    api_version = "client.authentication.k8s.io/v1beta1"
-    command     = "aws"
-    args = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
-  }
-}
 
 resource "kubernetes_cluster_role_binding" "view" {
   metadata {
@@ -64,32 +55,57 @@ resource "kubernetes_ingress_v1" "teleport" {
 
   }
 
-resource "kubernetes_manifest" "cert-manager-issuer" {
+resource "kubectl_manifest" "cert-manager-issuer" {
   depends_on = [ helm_release.cert-manager ]
-  manifest = {
-    apiVersion = "cert-manager.io/v1"
-    kind = "Issuer"
-    metadata = {
-      name = "letsencrypt-prod"
-      namespace = "default"
-    }
-    spec = {
-      acme = {
-        server = "https://acme-v02.api.letsencrypt.org/directory"
-        email = var.email_address
-        privateKeySecretRef = {
-          name = "letsencrypt-prod"
-        }
-        solvers = [
-          {
-            http01 = {
-              ingress = {
-                ingressClassName = "nginx"
-              }
-            }
-          }
-        ]
-      }
-    }
-  }
+  yaml_body = <<YAML
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt-prod
+  namespace: default
+spec:
+  acme:
+    # The ACME server URL
+    server: https://acme-v02.api.letsencrypt.org/directory
+    # Email address used for ACME registration
+    email: ${var.email_address}
+    # Name of a secret used to store the ACME account private key
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    # Enable the HTTP-01 challenge provider
+    solvers:
+      - http01:
+          ingress:
+            ingressClassName: nginx
+  YAML
 }
+
+# resource "kubernetes_manifest" "cert-manager-issuer" {
+#   depends_on = [ helm_release.cert-manager ]
+#   manifest = {
+#     apiVersion = "cert-manager.io/v1"
+#     kind = "Issuer"
+#     metadata = {
+#       name = "letsencrypt-prod"
+#       namespace = "default"
+#     }
+#     spec = {
+#       acme = {
+#         server = "https://acme-v02.api.letsencrypt.org/directory"
+#         email = var.email_address
+#         privateKeySecretRef = {
+#           name = "letsencrypt-prod"
+#         }
+#         solvers = [
+#           {
+#             http01 = {
+#               ingress = {
+#                 ingressClassName = "nginx"
+#               }
+#             }
+#           }
+#         ]
+#       }
+#     }
+#   }
+# }
