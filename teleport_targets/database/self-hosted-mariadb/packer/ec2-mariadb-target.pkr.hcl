@@ -109,8 +109,9 @@ build {
   provisioner "shell" {
     inline = [
       "echo Bootstrapping mariadb...",
-      "sudo mysql <<EOF\nCREATE USER ${var.mariadb_user};\nCREATE DATABASE ${var.database_name};\nCREATE DATABASE customers;\nEOF",
-      "sudo mysql <<EOF\nGRANT ALL PRIVILEGES ON customers.* TO 'developer'@'%';\nGRANT ALL PRIVILEGES ON ${var.database_name}.* TO 'developer'@'%';\nEOF",
+      "sudo mysql <<EOF\nCREATE USER ${var.mariadb_user};\nCREATE USER sudev;\nCREATE DATABASE ${var.database_name};\nCREATE DATABASE customers;\nEOF",
+      "sudo mysql <<EOF\nGRANT SELECT, SHOW VIEW ON ${var.database_name}.* TO '${var.mariadb_user}'@'%';\nEOF",
+      "sudo mysql <<EOF\nGRANT ALL PRIVILEGES ON ${var.database_name}.* TO 'sudev'@'%';\nGRANT ALL PRIVILEGES ON customers.* TO 'sudev'@'%';\nEOF",
       "sudo mysql <<EOF\nUSE ${var.database_name};\nCREATE TABLE vendors (vendorID int, vendorname varchar(255), website varchar(255));\ninsert into vendors values (1, 'Teleport', 'www.goteleport.com');\nEOF"
     ]
   }

@@ -42,7 +42,7 @@ ssh_service:
 db_service:
   enabled: "yes"
   databases:
-  - name: ${database_name}
+  - name: mariadb-dev
     description: "Development database"
     protocol: "mysql"
     uri: "localhost:3306"
