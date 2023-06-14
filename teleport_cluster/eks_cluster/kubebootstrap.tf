@@ -79,33 +79,3 @@ spec:
             ingressClassName: nginx
   YAML
 }
-
-# resource "kubernetes_manifest" "cert-manager-issuer" {
-#   depends_on = [ helm_release.cert-manager ]
-#   manifest = {
-#     apiVersion = "cert-manager.io/v1"
-#     kind = "Issuer"
-#     metadata = {
-#       name = "letsencrypt-prod"
-#       namespace = "default"
-#     }
-#     spec = {
-#       acme = {
-#         server = "https://acme-v02.api.letsencrypt.org/directory"
-#         email = var.email_address
-#         privateKeySecretRef = {
-#           name = "letsencrypt-prod"
-#         }
-#         solvers = [
-#           {
-#             http01 = {
-#               ingress = {
-#                 ingressClassName = "nginx"
-#               }
-#             }
-#           }
-#         ]
-#       }
-#     }
-#   }
-# }
