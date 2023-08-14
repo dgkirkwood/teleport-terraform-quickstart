@@ -6,7 +6,7 @@ data "azurerm_dns_zone" "existing" {
 # In testing this takes on average 20s.
 resource "time_sleep" "k8s_svc" {
   depends_on = [ azurerm_kubernetes_cluster.teleport, azurerm_postgresql_flexible_server.teleport ]
-  create_duration = "30s"
+  create_duration = "40s"
 }
 
 data "kubernetes_service" "teleport" {
