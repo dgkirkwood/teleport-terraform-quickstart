@@ -5,8 +5,8 @@ data "azurerm_dns_zone" "existing" {
 # To ensure we can pull the Teleport service IP address from the Kubernetes API, we need to wait for the service to be created.
 # In testing this takes on average 20s.
 resource "time_sleep" "k8s_svc" {
-  depends_on = [ azurerm_kubernetes_cluster.teleport, azurerm_postgresql_flexible_server.teleport ]
-  create_duration = "40s"
+  depends_on = [ azurerm_kubernetes_cluster.teleport, azurerm_postgresql_flexible_server_active_directory_administrator.admin, azurerm_postgresql_flexible_server_configuration.wal ]
+  create_duration = "60s"
 }
 
 data "kubernetes_service" "teleport" {
