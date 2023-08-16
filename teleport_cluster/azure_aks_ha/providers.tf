@@ -21,6 +21,7 @@ provider "azurerm" {
   features {}
 }
 
+# Used to install the teleport-cluster helm chart
 provider "helm" {
   kubernetes {
     host                   = azurerm_kubernetes_cluster.teleport.kube_config.0.host
@@ -37,6 +38,7 @@ provider "kubernetes" {
   cluster_ca_certificate = base64decode(azurerm_kubernetes_cluster.teleport.kube_config.0.cluster_ca_certificate)
 }
 
+# Used as a more flexible alternative to the Kubernetes provider to install cert manager manifest
 provider "kubectl" {
   host                   = azurerm_kubernetes_cluster.teleport.kube_config.0.host
   client_certificate = base64decode(azurerm_kubernetes_cluster.teleport.kube_config.0.client_certificate)
@@ -44,5 +46,6 @@ provider "kubectl" {
   cluster_ca_certificate = base64decode(azurerm_kubernetes_cluster.teleport.kube_config.0.cluster_ca_certificate)
 }
 
+# Pulling information on the current Azure config to use in resource definitions
 data "azurerm_client_config" "current" {}
 data "azurerm_subscription" "current" {}
