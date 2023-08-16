@@ -1,5 +1,5 @@
 resource "helm_release" "teleport-cluster" {
-  depends_on = [ azurerm_postgresql_flexible_server.teleport ]
+  depends_on = [ azurerm_postgresql_flexible_server_active_directory_administrator.admin, azurerm_postgresql_flexible_server_configuration.wal ]
   name = "teleport"
   repository = "https://charts.releases.teleport.dev"
   chart = "teleport-cluster"
