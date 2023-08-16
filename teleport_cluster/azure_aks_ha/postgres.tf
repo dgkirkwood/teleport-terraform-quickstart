@@ -1,4 +1,4 @@
-# Dev size POstgreSQL Flexible Server for testing only
+# Dev size PostgreSQL Flexible Server for testing only
 resource "azurerm_postgresql_flexible_server" "teleport" {
     name = "${var.prefix}-teleport-pg"
     resource_group_name = azurerm_resource_group.teleport.name
