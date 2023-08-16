@@ -12,20 +12,20 @@ Please note the following pre-requisites for using this repository:
 ## How to use this repository
 
 ### Terraform Build
-As long as you can satisfy the pre-requsites, Terraform will build everything you need for an Azure HA deployment in a contained Resource Group. You can take a look at the .tf files in this repository to understand what will be built. This is by no means a best-practice deployment, more one that will get you started quickly. 
+As long as you can satisfy the pre-requsites, Terraform will build everything you need for an Azure HA deployment in a single Resource Group. You can take a look at the .tf files in this repository to understand what will be built. This is by no means a best-practice deployment, more one that will get you started quickly. 
 
 1. Navigate to the `/teleport_cluster/azure_aks_ha` directory
 2. Open the `variables.tf` file and inspect the required variables for this build.
 3. Create a file named `terraform.tfvars` to satisfy the input variables. An example format for this file would be: 
 
 ```
-region = "ap-southeast-2"
-prefix = "short-unique-prefix"               # Any short character combination as a prefix for all created resources
-cluster_fqdn = "your.cluster.domain.name"    # This will be the domain name for your Teleport cluster
-hosted_zone = "domain.name"                  # This is your hosted zone (see pre-requisites). Must match domain from FQDN
-teleport_version = "13.0.3"                  # Must be >13.0.0
-ingress_name = "teleport"              
-email_address = "your@email.com"             # Used for Let's Encrypt certificate
+location = "australiaeast"                      # The Azure region where your resources will be deployed
+prefix = "dk"                                   # A short prefix which will be applied to all resources
+teleport_version = "13.3.2"                     # The Teleport Cluster version you would like to deploy
+dns_zone = "my.dnszone.com"                     # The address of your existing DNS zone 
+cluster_hostname = "azha"                       # The unique name for your cluster which will determine the FQDN
+email_address = "alice.smith@teleport.dev"      # Your email address for Lets Encrypt certs   
+dns_rg = "teleportdemo-dns"                     # The resource group where your existing DNS zone is located
 ```
 
 1. In the same directory, run `terraform init` to ensure Terraform has the right plugins loaded
