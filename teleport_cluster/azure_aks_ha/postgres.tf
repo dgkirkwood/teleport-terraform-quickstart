@@ -46,6 +46,8 @@ resource "azurerm_postgresql_flexible_server_active_directory_administrator" "ad
 
 }
 
+# Add the two required Teleport databases. Note that Teleport would create these if they did not exist
+# By defining these here, they are tracked in Terraform state and are easier to delete when needed
 resource "azurerm_postgresql_flexible_server_database" "teleport_backend" {
   server_id = azurerm_postgresql_flexible_server.teleport.id
   name = "teleport_backend"
