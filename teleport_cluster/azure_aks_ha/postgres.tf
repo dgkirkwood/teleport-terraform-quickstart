@@ -27,12 +27,12 @@ resource "azurerm_postgresql_flexible_server_configuration" "wal" {
   value = "logical"
 }
 
-# Allow access only from our Kubernetes subnet
+# Firewall rule taking the AKS public IP address as the only trusted IP for access
 resource "azurerm_postgresql_flexible_server_firewall_rule" "access" {
   name = "AllowK8s"
   server_id = azurerm_postgresql_flexible_server.teleport.id
-  start_ip_address = "0.0.0.0"
-  end_ip_address = "255.255.255.255"
+  start_ip_address = data.azurerm_public_ip.teleport.ip_address
+  end_ip_address = data.azurerm_public_ip.teleport.ip_address
 }
 
 # Assign the Teleport Service Principal as an admin on the PostgreSQL Flexible Server
