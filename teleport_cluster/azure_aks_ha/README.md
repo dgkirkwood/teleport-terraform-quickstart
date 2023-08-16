@@ -7,6 +7,7 @@ This repository contains Terraform code which will stand up a Teleport control p
 Please note the following pre-requisites for using this repository:
 - An existing DNS Zone in Azure. As domain registration is outside the scope of this code, we assume you have a registered domain with the DNS handled in an existing Azure resource group. 
 - The Terraform binary on your local machine, or on a machine where you can perform the automated builds. Tested using Terraform v1.4.6
+- The Azure CLI, useful for authenticating to Azure and for generating a kubeconfig once the deployment is complete. Installation instrations [here](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli).
 - Azure Credentials. Any of the accepted credential types for automated provisioning on Azure. Examples can be found [here](https://registry.terraform.io/providers/hashicorp/azurerm/3.68.0/docs#authenticating-to-azure).
 
 ## How to use this repository
@@ -32,4 +33,4 @@ dns_rg = "teleportdemo-dns"                     # The resource group where your 
 2. Run `terraform plan` to see the resources created by this code and ensure there are no input or syntax errors
 3. Run `terraform apply` to create the infrastructure and deployment. 
 4. On the completion of the Terraform run, you will see the `cluster-url` output, which you can input to your browser to see the running Teleport service. 
-5. If your service is up and running, you can configure your first role and user following the instructions [here](https://goteleport.com/docs/deploy-a-cluster/helm-deployments/kubernetes-cluster/#step-22-create-a-local-user). To authenticate to your Kubernetes cluster, complete one of the steps outlined [here](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html). The most common method is to use the AWS CLI - `aws eks update-kubeconfig --region=<your region> --name <your chosen prefix>`
+5. If your service is up and running, you can configure your first role and user following the instructions [here](https://goteleport.com/docs/deploy-a-cluster/helm-deployments/kubernetes-cluster/#step-22-create-a-local-user). To authenticate to your Kubernetes cluster, use the Azure CLI and run the command provided as part of the Terraform output.
