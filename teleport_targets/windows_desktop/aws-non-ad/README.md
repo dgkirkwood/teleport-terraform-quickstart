@@ -23,7 +23,7 @@ Packer is used to build a Windows Server 2019 AMI with the required Teleport ser
 1. Clone this repository to your local machine 
 2. Navigate to the `/teleport_targets/windows_desktop/aws-non-ad/packer` subdirectory
 3. Open the `variables.pkr.hcl` file and inspect the required variables for this build. If you are unsure about satisfying these variables, please see the pre-requisites above. 
-4. Create a file named `variables.auto.pkvars.hcl` to satisfy the input variables. An example format for this file would be: 
+4. Create a file named `variables.auto.pkrvars.hcl` to satisfy the input variables. An example format for this file would be: 
    
    ```
    ami_name = "win-2019-non-ad"
