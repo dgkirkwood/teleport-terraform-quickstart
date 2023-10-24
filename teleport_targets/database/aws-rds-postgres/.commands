@@ -1,0 +1,13 @@
+CREATE USER "teleport-postgres" login createrole;
+GRANT rds_iam TO "teleport-postgres";
+CREATE ROLE "read-products";
+CREATE ROLE "write-products";
+CREATE DATABASE products;
+\c products;
+CREATE TABLE vendors (vendorID int, vendorname varchar(255), website varchar(255));
+insert into vendors values (1, 'Teleport', 'www.goteleport.com');
+GRANT CONNECT ON DATABASE products TO "read-products";
+GRANT CONNECT ON DATABASE products TO "write-products";
+GRANT USAGE ON SCHEMA public TO "read-products";
+GRANT pg_read_all_data TO "read-products";
+GRANT INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO "write-products";
